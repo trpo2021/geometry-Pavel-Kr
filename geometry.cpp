@@ -50,6 +50,7 @@ int main()
         }
     }
     IsNumber = false;
+    bool IsFloat = false;
     for (int i = comma + 1; i <= right_par; i++) {
         if ((inp[i] == ' ' || inp[i] == ')') && IsNumber) {
             rcount++;
@@ -57,7 +58,13 @@ int main()
         }
         if ((inp[i] >= '0' && inp[i] <= '9') || inp[i] == ')')
             IsNumber = true;
-        else if (inp[i] == ' ')
+        else if (inp[i] == '.' && IsNumber && IsFloat) {
+            cout << "Error:radius must be float";
+            IsDataTrue = false;
+            break;
+        } else if (inp[i] == '.' && IsNumber && IsFloat == false) {
+            IsFloat = true;
+        } else if (inp[i] == ' ')
             continue;
         else {
             cout << "Error: wrong symbols" << endl;
