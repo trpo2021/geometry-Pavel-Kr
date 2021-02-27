@@ -33,6 +33,9 @@ int main()
         sscanf(data, " %d %d", &x, &y);
         radius = atof(rad);
         printf("x= %d\ny= %d\nradius= %f", x, y, radius);
+        float perimeter = CirclePerimeter(radius);
+        float area = CircleArea(radius);
+        cout << endl << "Perimeter= " << perimeter << endl << "Area= " << area;
     }
     return 0;
 }

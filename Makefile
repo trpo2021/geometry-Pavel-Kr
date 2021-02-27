@@ -1,16 +1,19 @@
 CC= g++
-CFLAGS = -Wall -Werror
+CFLAGS = -Wall -Werror -c
 
 all: main
 
-main: geometry.o circlecheck.o
+main: geometry.o circlecheck.o circle.o
 	$(CC) -o $@ $^
 
 geometry.o: geometry.cpp
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) $<
 	
 circlecheck.o: circlecheck.cpp
-	$(CC) $(CFLAGS) -c $<	
+	$(CC) $(CFLAGS) $<	
+
+circle.o: circle.cpp
+	$(CC) $(CFLAGS) $<
 
 clean:
 	rm *.o main
