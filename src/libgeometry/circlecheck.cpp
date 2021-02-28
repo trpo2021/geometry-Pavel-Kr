@@ -8,18 +8,9 @@ int CircleCheck(char *input)
     inp.assign(input);
     int left_par = inp.find('(');
     int right_par = inp.find(')', left_par);
-    int first_space = inp.find(' ');
     bool IsDataTrue = true;
     if (left_par == -1 || right_par == -1) {
         cout << "Error: parenthesis expected" << endl;
-        IsDataTrue = false;
-    }
-    int CircleTrue = inp.compare(0, first_space, "circle")
-            * inp.compare(0, left_par, "circle")
-            * inp.compare(0, first_space, "CIRCLE")
-            * inp.compare(0, left_par, "CIRCLE");
-    if (CircleTrue != 0) {
-        cout << "Error: circle expected" << endl;
         IsDataTrue = false;
     }
     int comma = inp.find(',', left_par);
