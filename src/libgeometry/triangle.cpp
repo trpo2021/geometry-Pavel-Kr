@@ -60,11 +60,10 @@ void Triangle(char* input)
             (x[2] - x[1]) * (x[2] - x[1]) + (y[2] - y[1]) * (y[2] - y[1]));
     float c = sqrt(
             (x[3] - x[2]) * (x[3] - x[2]) + (y[3] - y[2]) * (y[3] - y[2]));
-    if (a + b < c || a + c < b || b + c < a) {
+    if (a + b <= c || a + c <= b || b + c <= a) {
         cout << "Error: not a triangle" << endl;
         return;
     }
-    cout<<"a= "<<a<<endl<<"b= "<<b<<endl<<"c= "<<c<<endl;
     float per = TrianglePerimeter(a, b, c);
     float area = TriangleArea(a, b, c);
     cout << "Perimeter: " << per << endl << "Area: " << area << endl;
