@@ -1,74 +1,53 @@
-#include <libgeometry/functions.h>
 #include <iostream>
+#include <libgeometry/functions.h>
 #include <string>
 using namespace std;
-int CircleCheck(char *input)
+int CircleCheck(char* input)
 {
-    string inp;
-    inp.assign(input);
-    int left_par = inp.find('(');
-    int right_par = inp.find(')', left_par);
-    bool IsDataTrue = true;
-    if (left_par == -1 || right_par == -1) {
-        cout << "Error: parenthesis expected" << endl;
-        IsDataTrue = false;
-    }
-    int comma = inp.find(',', left_par);
-    if (comma == -1) {
-        cout << "Error: wrong data" << endl;
-        IsDataTrue = false;
-    }
+    int left_par, right_par, comma;
+    Search(input, left_par, right_par, comma);
+    if (left_par == -1 || right_par == -1)
+        return 1;
+    if (comma == -1)
+        return 2;
     bool IsNumber = false;
     int lcount = 0; // must be 2
     int rcount = 0; // must be 1
     for (int i = left_par + 1; i <= comma; i++) {
-        if ((inp[i] == ' ' || inp[i] == ',') && IsNumber) {
+        if ((input[i] == ' ' || input[i] == ',') && IsNumber) {
             lcount++;
             IsNumber = false;
         }
-        if ((inp[i] >= '0' && inp[i] <= '9') || inp[i] == ',') {
+        if ((input[i] >= '0' && input[i] <= '9') || input[i] == ',') {
             IsNumber = true;
-        } else if (inp[i] == ' ')
+        } else if (input[i] == ' ')
             continue;
-        else {
-            cout << "Error: wrong symbols" << endl;
-            IsDataTrue = false;
-            break;
-        }
+        else
+            return 3;
     }
     IsNumber = false;
     bool IsFloat = false;
     for (int i = comma + 1; i <= right_par; i++) {
-        if ((inp[i] == ' ' || inp[i] == ')') && IsNumber) {
+        if ((input[i] == ' ' || input[i] == ')') && IsNumber) {
             rcount++;
             IsNumber = false;
         }
-        if ((inp[i] >= '0' && inp[i] <= '9') || inp[i] == ')')
+        if ((input[i] >= '0' && input[i] <= '9') || input[i] == ')')
             IsNumber = true;
-        else if (inp[i] == '.' && IsNumber && IsFloat) {
-            cout << "Error:radius must be float";
-            IsDataTrue = false;
-            break;
-        } else if (inp[i] == '.' && IsNumber && IsFloat == false) {
+        else if (input[i] == '.' && IsNumber && IsFloat)
+            return 4;
+        else if (input[i] == '.' && IsNumber && IsFloat == false) {
             IsFloat = true;
-        } else if (inp[i] == ' ')
+        } else if (input[i] == ' ')
             continue;
-        else {
-            cout << "Error: wrong symbols" << endl;
-            IsDataTrue = false;
-            break;
-        }
+        else
+            return 3;
     }
-    if (lcount != 2 || rcount != 1) {
-        cout << "Error: wrong amount of data" << endl;
-        IsDataTrue = false;
-    }
+    if (lcount != 2 || rcount != 1)
+        return 5;
     for (int i = right_par + 2; i < 80; i++) {
-        if (input[i] != ' ') {
-            cout << "Error: unexpected token" << endl;
-            IsDataTrue = false;
-            break;
-        }
+        if (input[i] != ' ')
+            return 6;
     }
-    return IsDataTrue;
+    return 0;
 }

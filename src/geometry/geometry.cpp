@@ -10,18 +10,34 @@ int main()
     }
     cin.getline(input, 80);
     int CorT = CircleOrTriangle(input); // 0 for circle,1 for triangle, -1 error
-    bool is_circle = false;
-    bool is_triangle = false;
+    int is_circle;
+    int is_triangle;
     if (CorT == 0) {
         is_circle = CircleCheck(input);
-    }
-    if (CorT == 1) {
+        if (is_circle != 0)
+            PrintError(is_circle);
+    } else if (CorT == 1) {
         is_triangle = TriangleCheck(input);
+        if (is_triangle != 0)
+            PrintError(is_triangle);
+    } else {
+        cout << "Error:expected circle or triangle" << endl;
     }
-    if (is_circle) {
-        Circle(input);
-    } else if (is_triangle) {
-        Triangle(input);
+    if (is_circle == 0) {
+        float perimeter, area;
+        Circle(input, perimeter, area);
+        cout << endl << "Perimeter= " << perimeter << endl << "Area= " << area;
+    } else if (is_triangle == 0) {
+        float perimeter, area;
+        int err;
+        err = Triangle(input, perimeter, area);
+        if (err == 1)
+            cout << "Error: not a triangle" << endl;
+        else {
+            cout << endl
+                 << "Perimeter= " << perimeter << endl
+                 << "Area= " << area;
+        }
     }
     return 0;
 }
