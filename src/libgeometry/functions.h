@@ -2,7 +2,7 @@
 int CircleCheck(char *input);
 int TriangleCheck(char *input);
 int CircleOrTriangle(char *input);
-void Triangle(char *input);
-void Circle(char *input);
-float CircleArea(float radius);
-float CirclePerimeter(float radius);
+int Triangle(char* input,float &per, float &area);
+void Circle(char* input,float &per, float &area);
+void Search(char* inp,int& left_par, int& right_par, int& comma);
+void Search(char* input, int& left_par, int& right_par, int comma[]);

@@ -15,13 +15,19 @@ int main()
     if (CorT == 0) {
         is_circle = CircleCheck(input);
     }
-    if (CorT == 1) {
+    else if (CorT == 1) {
         is_triangle = TriangleCheck(input);
+    }else {
+        cout << "Error:expected circle or triangle" << endl;
     }
     if (is_circle) {
-        Circle(input);
+        float perimeter, area;
+        Circle(input, perimeter, area);
+        cout << endl << "Perimeter= " << perimeter << endl << "Area= " << area;
     } else if (is_triangle) {
-        Triangle(input);
+    	float perimeter, area;
+        Triangle(input, perimeter, area);
+        cout << endl << "Perimeter= " << perimeter << endl << "Area= " << area;
     }
     return 0;
 }

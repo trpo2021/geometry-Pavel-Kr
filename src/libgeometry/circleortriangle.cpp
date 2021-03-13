@@ -20,8 +20,6 @@ int CircleOrTriangle(char* input)
         return 0;
     if (triangle_true == 0)
         return 1;
-    else {
-        cout << "Error:expected circle or triangle" << endl;
+    else
         return -1;
-    }
 }
